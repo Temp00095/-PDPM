@@ -1,0 +1,503 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>เซียมซี PDPM</title>
+    <style>
+        body {
+            font-family: 'Prompt', sans-serif;
+            background-color: #f8f1e0;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            min-height: 100vh;
+            color: #8B4513;
+            background-image: url("data:image/svg+xml,%3Csvg width='100' height='100' viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M11 18c3.866 0 7-3.134 7-7s-3.134-7-7-7-7 3.134-7 7 3.134 7 7 7zm48 25c3.866 0 7-3.134 7-7s-3.134-7-7-7-7 3.134-7 7 3.134 7 7 7zm-43-7c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zm63 31c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zM34 90c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zm56-76c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zM12 86c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm28-65c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm23-11c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm-6 60c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm29 22c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zM32 63c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm57-13c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm-9-21c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM60 91c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM35 41c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM12 60c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2z' fill='%23d0b17a' fill-opacity='0.1' fill-rule='evenodd'/%3E%3C/svg%3E");
+        }
+        
+        header {
+            background-color: #a53b00;
+            color: #ffecd1;
+            width: 100%;
+            padding: 20px 0;
+            text-align: center;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            margin-bottom: 30px;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        header::before, header::after {
+            content: "";
+            position: absolute;
+            width: 60px;
+            height: 120px;
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%23ffd700'%3E%3Cpath d='M12 2L9.2 8.6 2 9.2 7 14 5.4 22 12 18 18.6 22 17 14 22 9.2 14.8 8.6z'/%3E%3C/svg%3E");
+            background-repeat: no-repeat;
+            background-size: contain;
+            opacity: 0.3;
+        }
+        
+        header::before {
+            left: 20px;
+            top: 10px;
+            transform: rotate(-15deg);
+        }
+        
+        header::after {
+            right: 20px;
+            top: 10px;
+            transform: rotate(15deg);
+        }
+        
+        h1 {
+            margin: 0;
+            font-size: 2.5rem;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+        }
+        
+        .container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            max-width: 800px;
+            width: 90%;
+            background-color: rgba(255, 255, 255, 0.9);
+            border-radius: 15px;
+            padding: 30px;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+            margin-bottom: 30px;
+            position: relative;
+        }
+        
+        .container::before {
+            content: "";
+            position: absolute;
+            top: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80%;
+            height: 20px;
+            background-color: #8B4513;
+            border-radius: 10px 10px 0 0;
+            z-index: -1;
+        }
+        
+        .fortune-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            width: 100%;
+            margin-top: 20px;
+        }
+        
+        .fortune-tube {
+            width: 150px;
+            height: 300px;
+            background: linear-gradient(to right, #8B4513, #A0522D, #8B4513);
+            border-radius: 15px;
+            position: relative;
+            overflow: hidden;
+            box-shadow: inset 0 0 20px rgba(0, 0, 0, 0.5), 0 10px 15px -5px rgba(0, 0, 0, 0.3);
+            margin-bottom: 30px;
+            border: 4px solid #6b3709;
+        }
+        
+        .fortune-sticks-container {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            transition: transform 0.3s ease;
+        }
+        
+        .fortune-sticks {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            width: 80%;
+            padding: 10px;
+        }
+        
+        .fortune-stick {
+            width: 10px;
+            height: 200px;
+            background: linear-gradient(to bottom, #f1d5a0, #e6c37d);
+            margin: 0 5px;
+            border-radius: 5px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+            position: relative;
+            transition: transform 0.3s ease;
+        }
+        
+        .fortune-stick::after {
+            content: attr(data-number);
+            position: absolute;
+            bottom: 10px;
+            left: 50%;
+            transform: translateX(-50%);
+            color: #8B4513;
+            font-weight: bold;
+            font-size: 10px;
+        }
+        
+        .shake-btn {
+            padding: 15px 30px;
+            background-color: #a53b00;
+            color: white;
+            border: none;
+            border-radius: 50px;
+            font-size: 1.2rem;
+            font-weight: bold;
+            cursor: pointer;
+            box-shadow: 0 4px 8px rgba(165, 59, 0, 0.3);
+            transition: all 0.3s ease;
+            margin-bottom: 20px;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .shake-btn:hover {
+            background-color: #872f00;
+            transform: translateY(-2px);
+            box-shadow: 0 6px 12px rgba(165, 59, 0, 0.4);
+        }
+        
+        .shake-btn:active {
+            transform: translateY(0);
+            box-shadow: 0 2px 4px rgba(165, 59, 0, 0.3);
+        }
+        
+        .shake-btn::before {
+            content: "";
+            position: absolute;
+            top: -10px;
+            left: -10px;
+            right: -10px;
+            bottom: -10px;
+            background: linear-gradient(45deg, rgba(255, 255, 255, 0.2) 0%, rgba(255, 255, 255, 0) 60%);
+            transform: rotate(25deg) translateX(-100%);
+            transition: transform 0.5s ease;
+        }
+        
+        .shake-btn:hover::before {
+            transform: rotate(25deg) translateX(100%);
+        }
+        
+        .result-container {
+            display: none;
+            width: 100%;
+            text-align: center;
+            background-color: #fff9ed;
+            border-radius: 10px;
+            padding: 20px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            border: 2px solid #d0b17a;
+            margin-top: 20px;
+            max-width: 600px;
+            position: relative;
+        }
+        
+        .result-container::before, .result-container::after {
+            content: "";
+            position: absolute;
+            width: 30px;
+            height: 30px;
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%23a53b00'%3E%3Cpath d='M12 2L9.2 8.6 2 9.2 7 14 5.4 22 12 18 18.6 22 17 14 22 9.2 14.8 8.6z'/%3E%3C/svg%3E");
+            background-repeat: no-repeat;
+            background-size: contain;
+            opacity: 0.2;
+        }
+        
+        .result-container::before {
+            top: 10px;
+            left: 10px;
+        }
+        
+        .result-container::after {
+            bottom: 10px;
+            right: 10px;
+        }
+        
+        .result-number {
+            font-size: 2.5rem;
+            font-weight: bold;
+            color: #a53b00;
+            margin: 10px 0;
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.1);
+        }
+        
+        .result-title {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: #8B4513;
+            margin-bottom: 10px;
+            border-bottom: 2px solid #d0b17a;
+            padding-bottom: 5px;
+        }
+        
+        .result-description {
+            font-size: 1.1rem;
+            line-height: 1.6;
+            color: #5e3a13;
+        }
+        
+        .reset-btn {
+            padding: 10px 20px;
+            background-color: #d0b17a;
+            color: #8B4513;
+            border: none;
+            border-radius: 30px;
+            font-size: 1rem;
+            font-weight: bold;
+            cursor: pointer;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+            margin-top: 15px;
+        }
+        
+        .reset-btn:hover {
+            background-color: #c0a26a;
+            transform: translateY(-2px);
+        }
+        
+        .instructions {
+            text-align: center;
+            margin-bottom: 20px;
+            color: #5e3a13;
+            font-size: 1.1rem;
+            line-height: 1.5;
+        }
+        
+        footer {
+            background-color: #8B4513;
+            color: #ffecd1;
+            width: 100%;
+            padding: 15px 0;
+            text-align: center;
+            font-size: 0.9rem;
+            margin-top: auto;
+        }
+        
+        .disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+        }
+        
+        .shake-animation {
+            animation: shake 0.8s cubic-bezier(.36,.07,.19,.97) both;
+        }
+        
+        @keyframes shake {
+            10%, 90% {
+                transform: translate3d(-1px, 0, 0) rotate(1deg);
+            }
+            
+            20%, 80% {
+                transform: translate3d(2px, -3px, 0) rotate(-2deg);
+            }
+            
+            30%, 50%, 70% {
+                transform: translate3d(-4px, 2px, 0) rotate(3deg);
+            }
+            
+            40%, 60% {
+                transform: translate3d(4px, -2px, 0) rotate(-3deg);
+            }
+        }
+        
+        @keyframes stickFall {
+            0% {
+                transform: translateY(-150%);
+            }
+            60% {
+                transform: translateY(10%);
+            }
+            80% {
+                transform: translateY(-5%);
+            }
+            100% {
+                transform: translateY(0);
+            }
+        }
+        
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        .fade-in {
+            animation: fadeIn 0.8s ease forwards;
+        }
+        
+        @media (max-width: 768px) {
+            .container {
+                width: 95%;
+                padding: 20px;
+            }
+            
+            h1 {
+                font-size: 2rem;
+            }
+            
+            .fortune-tube {
+                width: 120px;
+                height: 240px;
+            }
+            
+            .fortune-stick {
+                width: 8px;
+                height: 160px;
+                margin: 0 3px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>เซียมซีมงคล</h1>
+    </header>
+    
+    <div class="container">
+        <div class="instructions">
+            <p>ตั้งจิตอธิษฐาน แล้วกดปุ่ม "เขย่าเซียมซี" เพื่อทำนายโชคชะตาของท่าน</p>
+        </div>
+        
+        <div class="fortune-container">
+            <div class="fortune-tube">
+                <div class="fortune-sticks-container">
+                    <div class="fortune-sticks">
+                        <div class="fortune-stick" data-number="1"></div>
+                        <div class="fortune-stick" data-number="2"></div>
+                        <div class="fortune-stick" data-number="3"></div>
+                        <div class="fortune-stick" data-number="4"></div>
+                        <div class="fortune-stick" data-number="5"></div>
+                        <div class="fortune-stick" data-number="6"></div>
+                        <div class="fortune-stick" data-number="7"></div>
+                        <div class="fortune-stick" data-number="8"></div>
+                        <div class="fortune-stick" data-number="9"></div>
+                        <div class="fortune-stick" data-number="10"></div>
+                    </div>
+                </div>
+            </div>
+            
+            <button class="shake-btn">เขย่าเซียมซี</button>
+        </div>
+        
+        <div class="result-container">
+            <div class="result-number">0</div>
+            <div class="result-title">คำทำนาย</div>
+            <div class="result-description"></div>
+            <button class="reset-btn">เสี่ยงทายอีกครั้ง</button>
+        </div>
+    </div>
+    
+    <footer>
+        &copy; 2025 เซียมซีมงคล - ขอให้ทุกท่านโชคดี มีความสุข
+    </footer>
+    
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            const shakeBtn = document.querySelector(".shake-btn");
+            const resetBtn = document.querySelector(".reset-btn");
+            const fortuneTube = document.querySelector(".fortune-tube");
+            const sticksContainer = document.querySelector(".fortune-sticks-container");
+            const resultContainer = document.querySelector(".result-container");
+            const resultNumber = document.querySelector(".result-number");
+            const resultDescription = document.querySelector(".result-description");
+            
+            // คำทำนายแต่ละหมายเลข (ด้านดีทั้งหมด)
+            const fortunes = {
+                1: "โชคลาภกำลังจะมาเยือนท่าน ความพยายามที่ผ่านมาจะเกิดผล ทั้งการงานและการเงินจะราบรื่น มีคนอุปถัมภ์ช่วยเหลือ ถ้ามีปัญหาคาใจให้ใจเย็นๆ เพราะทุกอย่างกำลังจะคลี่คลายไปในทางที่ดี",
+                2: "ดวงดาวแห่งความสำเร็จกำลังส่องสว่าง สิ่งที่ตั้งใจทำจะประสบความสำเร็จ มีโอกาสก้าวหน้าในหน้าที่การงาน การเงินมั่นคง ความรักจะหวานชื่น คนโสดจะพบเนื้อคู่ที่ดี สุขภาพแข็งแรง",
+                3: "พลังแห่งความมุ่งมั่นของท่านจะนำพาไปสู่ความสำเร็จ อุปสรรคที่เคยขวางทางจะหายไป การเงินจะคล่องตัว มีโชคลาภทางการเงิน ความรักจะมั่นคง จิตใจสงบ มีความสุข",
+                4: "ดวงชะตากำลังเปลี่ยนแปลงไปในทางที่ดี มีโอกาสใหม่ๆ เข้ามา การงานจะก้าวหน้า มีคนช่วยเหลือสนับสนุน การเงินจะดีขึ้น หากมีความรักจะหวานชื่น สุขภาพแข็งแรง จิตใจเบิกบาน",
+                5: "โชคดีกำลังเข้ามาในชีวิต ความฝันที่เคยรอคอยกำลังจะเป็นจริง ทำการงานจะสำเร็จลุล่วง การเงินคล่องตัว มีเงินก้อนใหญ่เข้ามา ความรักสดใส มีความสุขในครอบครัว สุขภาพดี",
+                6: "ดวงดีมีชัย ทุกสิ่งที่ทำจะราบรื่น การงานจะประสบความสำเร็จ มีโอกาสเลื่อนตำแหน่ง การเงินมั่นคง รายได้เพิ่มขึ้น ความรักจะหวานชื่น คนรอบข้างจะให้ความรักความเมตตา",
+                7: "โชคลาภรออยู่เบื้องหน้า ท่านกำลังจะพบกับสิ่งที่ดีในชีวิต การงานจะราบรื่น มีโอกาสก้าวหน้า การเงินจะดีขึ้น มีรายได้เพิ่ม ความรักจะมั่นคง คนรอบข้างจะให้ความช่วยเหลือ",
+                8: "ดวงดาวแห่งความโชคดีส่องสว่าง ทุกสิ่งที่ทำจะสำเร็จดังใจหวัง การงานจะก้าวหน้า มีโอกาสใหม่ๆ การเงินจะคล่องตัว มีโชคลาภ ความรักจะสดใส มีความสุขในครอบครัว",
+                9: "พลังบุญบารมีจะคุ้มครองท่าน อุปสรรคจะหมดไป การงานจะราบรื่น มีโอกาสเติบโต การเงินจะดีขึ้น มีรายได้เพิ่ม ความรักจะหวานชื่น มีความสุขในความสัมพันธ์ สุขภาพแข็งแรง",
+                10: "ดวงดีสุดๆ ทุกสิ่งจะเป็นไปตามที่ปรารถนา การงานจะประสบความสำเร็จ มีโอกาสก้าวหน้า การเงินจะคล่องตัว มีโชคลาภก้อนใหญ่ ความรักจะสมหวัง มีความสุขล้นเหลือ สุขภาพแข็งแรง"
+            };
+            
+            // สร้าง array ของหมายเลขที่ยังไม่ได้ใช้
+            let unusedNumbers = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
+            
+            function shakeFortune() {
+                if (unusedNumbers.length === 0) {
+                    // ถ้าใช้ครบทุกหมายเลขแล้ว ให้รีเซ็ตใหม่
+                    unusedNumbers = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
+                }
+                
+                shakeBtn.disabled = true;
+                shakeBtn.classList.add("disabled");
+                
+                // เพิ่ม animation การเขย่า
+                fortuneTube.classList.add("shake-animation");
+                sticksContainer.classList.add("shake-animation");
+                
+                setTimeout(() => {
+                    fortuneTube.classList.remove("shake-animation");
+                    sticksContainer.classList.remove("shake-animation");
+                    
+                    // สุ่มหมายเลขที่ยังไม่ได้ใช้
+                    const randomIndex = Math.floor(Math.random() * unusedNumbers.length);
+                    const selectedNumber = unusedNumbers[randomIndex];
+                    
+                    // ลบหมายเลขที่ใช้แล้วออกจาก array
+                    unusedNumbers.splice(randomIndex, 1);
+                    
+                    // แสดงผล
+                    resultNumber.textContent = selectedNumber;
+                    resultDescription.textContent = fortunes[selectedNumber];
+                    resultContainer.style.display = "block";
+                    resultContainer.classList.add("fade-in");
+                    
+                    // ซ่อนเซียมซีที่ถูกเลือก
+                    const sticks = document.querySelectorAll(".fortune-stick");
+                    sticks.forEach(stick => {
+                        if (parseInt(stick.dataset.number) === selectedNumber) {
+                            stick.style.animation = "stickFall 1s forwards";
+                            stick.style.transformOrigin = "center top";
+                            setTimeout(() => {
+                                stick.style.transform = "translateY(50px)";
+                            }, 1000);
+                        }
+                    });
+                    
+                }, 1000);
+            }
+            
+            function resetFortune() {
+                resultContainer.style.display = "none";
+                resultContainer.classList.remove("fade-in");
+                
+                // รีเซ็ตตำแหน่งเซียมซี
+                const sticks = document.querySelectorAll(".fortune-stick");
+                sticks.forEach(stick => {
+                    stick.style.animation = "";
+                    stick.style.transform = "";
+                });
+                
+                shakeBtn.disabled = false;
+                shakeBtn.classList.remove("disabled");
+            }
+            
+            shakeBtn.addEventListener("click", shakeFortune);
+            resetBtn.addEventListener("click", resetFortune);
+        });
+    </script>
+</body>
+</html>
